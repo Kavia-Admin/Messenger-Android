@@ -25,36 +25,45 @@
 package org.mesibo.messenger.Utils;
 
 import android.content.Context;
-import android.content.pm.PackageManager;
+import android.view.View;
 
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.appcompat.app.AppCompatActivity;
+import org.mesibo.messenger.UIManager;
 
+// Example skeleton for wiring edit/delete in the adapter
 public class AppUtils {
+    // This is a utility method for binding message view
+    // Integrate this logic for edit/delete support in your message UI (e.g. adapter)
 
-
-    public static boolean aquireUserPermission(Context context, final String permission, int REQUEST_CODE) {
-        if (ContextCompat.checkSelfPermission(context, permission)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale((AppCompatActivity)context,
-                    permission)) {
-
-            } else {
-                ActivityCompat.requestPermissions((AppCompatActivity)context,
-                        new String[]{permission},
-                        REQUEST_CODE);
-            }
-
-            return false;
+    public static void bindMessageView(View messageView, Message msg, Context ctx) {
+        View optionsBtn = messageView.findViewById(R.id.msg_options_btn); // btn for msg actions
+        if (msg.isOwnMessage()) {
+            optionsBtn.setVisibility(View.VISIBLE);
+            optionsBtn.setOnClickListener(v -> {
+                UIManager.showMessageOptions(ctx, v, msg,
+                    () -> promptEditMessage(ctx, msg),
+                    () -> confirmAndDeleteMessage(ctx, msg)
+                );
+            });
+        } else {
+            optionsBtn.setVisibility(View.GONE);
         }
-
-        return true;
-
     }
 
+    private static void promptEditMessage(Context ctx, Message msg) {
+        // Show your preferred dialog to edit text, then call:
+        UIManager.editMessageApi(ctx, msg.getId(), "edited text", () -> {
+            // Update message in UI (e.g. set as edited)
+        }, () -> {
+            // Show error
+        });
+    }
 
-
+    private static void confirmAndDeleteMessage(Context ctx, Message msg) {
+        // Show confirmation dialog, then:
+        UIManager.deleteMessageApi(ctx, msg.getId(), () -> {
+            // UI: mark message as deleted ("Message deleted")
+        }, () -> {
+            // Show error
+        });
+    }
 }
