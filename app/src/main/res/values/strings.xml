@@ -9,4 +9,6 @@
     <string name="expiry_5m">5 Minutes</string>
     <string name="expiry_1h">1 Hour</string>
     <string name="expiry_1d">1 Day</string>
+    <string name="search">Search</string>
+    <string name="search_hint">Enter text to search...</string>
 </resources>

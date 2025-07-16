@@ -28,11 +28,9 @@
         android:requestLegacyExternalStorage="true"
         android:theme="@style/AppTheme">
 
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="GOOGLE_MAP_KEY" />
-
 
         <activity
             android:name=".EditProfileActivity"
@@ -46,7 +44,7 @@
             android:windowSoftInputMode="stateAlwaysHidden"
             android:noHistory="true"
             android:launchMode="singleTop"
-	    android:exported="true"
+            android:exported="true"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -54,6 +52,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- ADVANCED SEARCH ACTIVITY REGISTRATION -->
+        <activity
+            android:name="org.mesibo.messenger.SearchActivity"
+            android:label="Advanced Search"
+            android:exported="false"/>
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -65,8 +69,8 @@
             android:windowSoftInputMode="adjustPan" />
 
         <receiver android:name=".AutoStart"
-		android:exported="true" 
-	    >
+            android:exported="true" 
+            >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"></action>
                 <action android:name="org.mesibo.messenger.restart"></action>
@@ -75,8 +79,8 @@
 
         <!-- Firebase Notifications-->
         <service android:name=".fcm.MesiboGcmListenerService" 
-		android:exported="false" 
-		>
+            android:exported="false" 
+            >
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
