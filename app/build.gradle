@@ -1,4 +1,3 @@
-
 apply plugin: 'com.android.application'
 apply from: "https://cdn.mesibo.com/android/mesibo.gradle"
 
@@ -78,8 +77,16 @@ dependencies {
     implementation "com.mesibo.api:mesibo:${project.MesiboVersion_Api}"
     implementation "com.mesibo.api:ui:${project.MesiboVersion_Ui}"
     implementation "com.mesibo.api:callui:${project.MesiboVersion_CallUi}"
+
+    // Emoji picker library
+    implementation 'com.vanniktech:emoji-google:0.16.0'
+
+    // Sticker/StickerView library
+    implementation 'io.github.aghajari:AXStickerView:1.0.6' // AXStickerView for stickers
+
+    // GIF picker (Giphy)
+    implementation 'com.giphy.sdk:ui:2.1.10' // Giphy SDK for GIF picker
 }
 
 // this line needs to be at bottom else it gives error of version conflict
 apply plugin: 'com.google.gms.google-services'
-

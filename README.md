@@ -17,6 +17,7 @@ Mesibo Messenger is an open-source app with real-time messaging, voice and video
 - **Edit and Delete sent messages (long-press own message > Edit/Delete, syncs in real-time)**
 - **Disappearing messages: Set optional expiry/TTL (self-destruct) per message**
 - **Message Reactions (new):** Long-press on a message to pick emoji or reaction. The reaction is shown below each message, with aggregated counts per emoji. Real-time sync ensures all chat users see when someone reacts/un-reacts.
+- **Stickers/Emoji/GIF support:** Tap the new emoji/sticker/gif buttons in the chat UI to send animated stickers, emojis, and GIF messages. Received sticker/gif/emoji messages are rendered in the message view. (Emoji/sticker/GIF support powered by Vanniktech Emoji, AXStickerView, and Giphy SDK).
 
 Latest versions are also available from [Google Play Store](https://play.google.com/store/apps/details?id=com.mesibo.mesiboapplication) OR [Apple AppStore](https://itunes.apple.com/us/app/mesibo-realtime-messaging-voice-video/id1222921751)
 
