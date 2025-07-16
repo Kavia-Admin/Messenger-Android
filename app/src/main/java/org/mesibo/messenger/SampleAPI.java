@@ -1,49 +1,57 @@
 package org.mesibo.messenger;
 
+import android.content.Context;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import org.json.JSONObject;
+import org.json.JSONArray;
+
+// Add helper/sample API integration here.
+
 public class SampleAPI {
+    private Context context;
+    private String backendBaseUrl; // e.g. https://your-backend-url/
 
-    public static final int MESSAGE_TYPE_TEXT = 1;
-    public static final int MESSAGE_TYPE_IMAGE = 2;
-    // ... (existing code)
-
-    /**
-     * Message model to include expiry
-     */
-    public static class Message {
-        public String from;
-        public String to;
-        public String message;
-        public int type;
-        public String data;
-        public long timestamp;
-        public Long expiryTs; // Null = never expires
-        public String status;
-        // ... Add other fields as per app
-        
-        // Returns number of seconds left until expire, or null.
-        public Long getSecondsLeft() {
-            if (expiryTs == null) return null;
-            long now = System.currentTimeMillis()/1000L;
-            return expiryTs > now ? expiryTs - now : 0;
-        }
-
-        public boolean isExpired() {
-            Long left = getSecondsLeft();
-            return (left != null && left <= 0);
-        }
+    public SampleAPI(Context context, String backendBaseUrl) {
+        this.context = context;
+        this.backendBaseUrl = backendBaseUrl;
     }
 
-    // Modified: sendMessage to support expiry
-    /**
-     * PUBLIC_INTERFACE
-     * Send a message, with optional expiry (TTL in seconds; if null or zero = never expires).
-     */
-    public static void sendMessage(Profile user, String message, Integer ttlSeconds) {
-        // Construct params with TTL if provided
-        // Use network/API code to send 'expiry' param to backend
-        // Example: send param "expiry" with value ttlSeconds to server's send_message endpoint
-        // On success, store expiryTs if returned
+    // PUBLIC_INTERFACE
+    // Add a reaction to a message
+    public void addReaction(int from, int messageId, String reaction, Response.Listener<String> listener, Response.ErrorListener errorListener) {
+        String url = backendBaseUrl + "/?api=add_reaction&from=" + from + "&message_id=" + messageId + "&reaction=" + reaction;
+        RequestQueue queue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, listener, errorListener);
+        queue.add(stringRequest);
     }
-    
-    // ... rest of the class remains unchanged ...
+
+    // PUBLIC_INTERFACE
+    // Remove a reaction from a message
+    public void removeReaction(int from, int messageId, String reaction, Response.Listener<String> listener, Response.ErrorListener errorListener) {
+        String url = backendBaseUrl + "/?api=remove_reaction&from=" + from + "&message_id=" + messageId + "&reaction=" + reaction;
+        RequestQueue queue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, listener, errorListener);
+        queue.add(stringRequest);
+    }
+
+    // PUBLIC_INTERFACE
+    // Get reactions for given message(s)
+    public void getReactions(Object messageIds, Response.Listener<String> listener, Response.ErrorListener errorListener) {
+        // messageIds: int or List<Integer>
+        String ids = "";
+        if (messageIds instanceof Integer) {
+            ids = String.valueOf((Integer) messageIds);
+        } else if (messageIds instanceof java.util.List) {
+            java.util.List<Integer> list = (java.util.List<Integer>) messageIds;
+            ids = android.text.TextUtils.join(",", list);
+        }
+        String url = backendBaseUrl + "/?api=get_reactions&message_id=" + ids;
+        RequestQueue queue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, listener, errorListener);
+        queue.add(stringRequest);
+    }
 }

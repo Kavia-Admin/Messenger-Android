@@ -16,6 +16,7 @@ Mesibo Messenger is an open-source app with real-time messaging, voice and video
 - Push notifications
 - **Edit and Delete sent messages (long-press own message > Edit/Delete, syncs in real-time)**
 - **Disappearing messages: Set optional expiry/TTL (self-destruct) per message**
+- **Message Reactions (new):** Long-press on a message to pick emoji or reaction. The reaction is shown below each message, with aggregated counts per emoji. Real-time sync ensures all chat users see when someone reacts/un-reacts.
 
 Latest versions are also available from [Google Play Store](https://play.google.com/store/apps/details?id=com.mesibo.mesiboapplication) OR [Apple AppStore](https://itunes.apple.com/us/app/mesibo-realtime-messaging-voice-video/id1222921751)
 
