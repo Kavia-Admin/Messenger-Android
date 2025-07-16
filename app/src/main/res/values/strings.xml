@@ -1,9 +1,12 @@
-<resources tools:ignore="ExtraTranslation" xmlns:tools="http://schemas.android.com/tools">
-
-    <string name="app_name">Mesibo</string>
-    <string name="menu_conf">Conferencing</string>
-    <string name="menu_calllogs">Call Logs</string>
-    <string name="menu_settings">Settings</string>
-
-
+<resources>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="set_expiry">Set Disappearing Timer</string>
+    <string name="disappearing_title">Disappearing Message</string>
+    <string name="expires_in">%1$d seconds left</string>
+    <string name="message_expired">Message expired</string>
+    <string name="expiry_never">Never</string>
+    <string name="expiry_30s">30 Seconds</string>
+    <string name="expiry_5m">5 Minutes</string>
+    <string name="expiry_1h">1 Hour</string>
+    <string name="expiry_1d">1 Day</string>
 </resources>
